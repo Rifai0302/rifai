@@ -15,14 +15,14 @@ $page = 'Menu';
 <div class="row justify-content-center">
     <div class="col-md-12">
         <div class="card" style="border-radius: 15px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);">
-            <div class="card-header" style="background-color: #64B9F0; font-weight: bold; color: white; border-radius: 15px 15px 0 0;">
+            <div class="card-header" style="background-color: #495057; font-weight: bold; color: white; border-radius: 15px 15px 0 0;">
                 <div class="row">
                     <div class="col">
                         Menu
                     </div>
                     <div class="col d-flex justify-content-end align-items-center">
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-dark btn-sm" data-bs-toggle="modal"
                                 data-bs-target="#tambah" style="border-radius: 10px;">
                             Tambah Menu
                         </button>
@@ -78,15 +78,15 @@ $page = 'Menu';
 
                     <div class="card-body">
     <table class="table table-bordered border-dark table-striped">
-        <thead style="background-color: #64B9F0; color: white;">
+        <thead style="background-color: #495057; color: white;">
             <tr>
-                <th>No.</th>
-                <th>Menu</th>
-                <th>Gambar</th>
-                <th>Deskripsi</th>
-                <th>Harga</th>
-                <th>Stock</th>
-                <th>aksi</th>
+                <th style="color: white;">No.</th>
+                <th style="color: white;">Menu</th>
+                <th style="color: white;">Gambar</th>
+                <th style="color: white;">Deskripsi</th>
+                <th style="color: white;">Harga</th>
+                <th style="color: white;">Stock</th>
+                <th style="color: white;">aksi</th>
             </tr>
         </thead>
         <tbody>

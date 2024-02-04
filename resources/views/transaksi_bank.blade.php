@@ -13,44 +13,45 @@ $page = 'Transaksi Bank';
         @endif
 
         <div class="row">
-            <div class="col-md-12">
-                <h2 class="text-center mb-4">Transaksi Bank</h2>
+        <div class="col-md-12">
+    <h2 class="text-center mb-4" style="font-family: Arial, sans-serif; font-weight: bold;">Data Transaksi Bank</h2>
+</div>
+
+</div>
+
+<div class="row">
+    @foreach ($transaksis as $key => $transaksi)
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">{{ $transaksi->user->name }}</h5>
+                    <p class="card-text">
+                        <strong>Invoice ID:</strong> {{ $transaksi->invoice_id }}<br>
+                        <strong>Status:</strong>
+                        @switch($transaksi->status)
+                            @case(1)
+                                <span class="badge bg-warning text-dark">ON CART</span>
+                                @break
+                            @case(2)
+                                <span class="badge bg-info text-dark">PENDING</span>
+                                @break
+                            @case(3)
+                                <span class="badge bg-success">COMPLETED</span>
+                                @break
+                            @case(4)
+                                <span class="badge bg-secondary">FINISHED</span>
+                                @break
+                            @case(5)    
+                            <span class="badge bg-danger">FAILED</span>
+                                @break
+                            @default
+                        @endswitch
+                    </p>
+                    <a href="#" class="btn btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#detail-{{ $transaksi->invoice_id }}">View Details</a>
+                </div>
             </div>
         </div>
-
-        <div class="row">
-            @foreach ($transaksis as $key => $transaksi)
-                <div class="col-md-6">
-                    <div class="card mb-4">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $transaksi->user->name }}</h5>
-                            <p class="card-text">
-                                <strong>Invoice ID:</strong> {{ $transaksi->invoice_id }}<br>
-                                <strong>Status:</strong>
-                                @switch($transaksi->status)
-                                    @case(1)
-                                        <span class="badge bg-warning text-dark">ON CART</span>
-                                        @break
-                                    @case(2)
-                                        <span class="badge bg-info text-dark">PENDING</span>
-                                        @break
-                                    @case(3)
-                                        <span class="badge bg-success">COMPLETED</span>
-                                        @break
-                                    @case(4)
-                                        <span class="badge bg-secondary">FINISHED</span>
-                                        @break
-                                    @case(5)    
-                                        <span class="badge bg-secondary">FAILED</span>
-                                        @break
-                                    @default
-                                @endswitch
-                            </p>
-                            <a href="#" class="btn btn-primary" data-bs-toggle="modal"
-                                data-bs-target="#detail-{{ $transaksi->invoice_id }}">View Details</a>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Modal -->
                 <div class="modal fade" id="detail-{{ $transaksi->invoice_id }}" tabindex="-1"
@@ -107,6 +108,11 @@ $page = 'Transaksi Bank';
                                 <button type="button" class="btn btn-secondary"
                                     data-bs-dismiss="modal">Close</button>
                             </div>
+                            <div class="footer m-3">
+                        <button type="button" class="btn btn-primary" onclick="window.print()">
+                            PRINT
+                        </button>
+                    </div>
                         </div>
                     </div>
                 </div>
