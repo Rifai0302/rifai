@@ -11,21 +11,24 @@ $page = 'Menu';
                 {{ session('status') }}
             </div>
         @endif
-        <div class="row justify-content-center">
-            <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header" style="background-color: #64B9F0; font-weight: bold" >
-                        <div class="row">
-                            <div class="col" style="color: white" >
-                                Menu
-                            </div>
-                            <div class="col d-flex justify-content-end">
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                    data-bs-target="#tambah">
-                                    Tambah Menu
-                                </button>
-
+       
+<div class="row justify-content-center">
+    <div class="col-md-12">
+        <div class="card" style="border-radius: 15px; box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);">
+            <div class="card-header" style="background-color: #64B9F0; font-weight: bold; color: white; border-radius: 15px 15px 0 0;">
+                <div class="row">
+                    <div class="col">
+                        Menu
+                    </div>
+                    <div class="col d-flex justify-content-end align-items-center">
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                                data-bs-target="#tambah" style="border-radius: 10px;">
+                            Tambah Menu
+                        </button>
+                    </div>
+                </div>
+            </div>
                                 <!-- Modal -->
                                 <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="exampleModalLabel"
                                     aria-hidden="true">
@@ -74,49 +77,48 @@ $page = 'Menu';
                     </div>
 
                     <div class="card-body">
-                        <table class="table table-bordered border-dark table-striped">
-                            <thead>
-                                <tr>
-                                    <th>No.</th>
-                                    <th>Menu</th>
-                                    <th>Gambar</th>
-                                    <th>Description</th>
-                                    <th>Price</th>
-                                    <th>Stock</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($barangs as $key => $barang)
-                                    <tr>
-                                        <td>{{ $key + 1 }}</td>
-                                        <td>{{ $barang->name }}</td>
-                                        <td>
-                                            <img width="100" height="75" src={{ asset('assets/images/' . $barang->image) }}
-                                                alt="not found" />
-                                        </td>
-                                        <td>{{ $barang->desc }}</td>
-                                        <td>{{ $barang->price }}</td>
-                                        <td>{{ $barang->stock }}</td>
-                                        <td>
-                                            <!-- Button trigger modal -->
-                                            <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#edit-{{ $barang->id }}">
-                                                Edit
-                                            </button>
+    <table class="table table-bordered border-dark table-striped">
+        <thead style="background-color: #64B9F0; color: white;">
+            <tr>
+                <th>No.</th>
+                <th>Menu</th>
+                <th>Gambar</th>
+                <th>Deskripsi</th>
+                <th>Harga</th>
+                <th>Stock</th>
+                <th>aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($barangs as $key => $barang)
+                <tr>
+                    <td>{{ $key + 1 }}</td>
+                    <td>{{ $barang->name }}</td>
+                    <td>
+                        <img width="100" height="75" src="{{ asset('assets/images/' . $barang->image) }}"
+                            alt="not found" />
+                    </td>
+                    <td>{{ $barang->desc }}</td>
+                    <td>{{ $barang->price }}</td>
+                    <td>{{ $barang->stock }}</td>
+                    <td>
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#edit-{{ $barang->id }}" style="border-radius: 10px;">
+                            Edit
+                        </button>
 
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="edit-{{ $barang->id }}" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Edit Menu
-                                                                {{ $barang->name }}</h5>
-                                                            <button type="button" class="btn-close"
-                                                                data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <form method="POST"
+                        <!-- Modal -->
+                        <div class="modal fade" id="edit-{{ $barang->id }}" tabindex="-1"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header" style="background-color: #64B9F0; color: white;">
+                                        <h5 class="modal-title" id="exampleModalLabel">Edit Menu
+                                            {{ $barang->name }}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>                                                        <form method="POST"
                                                             action="{{ route('menu.edit', ['id' => $barang->id]) }}">
                                                             @method("put")
                                                             @csrf

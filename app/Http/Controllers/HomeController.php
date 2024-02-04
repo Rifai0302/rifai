@@ -45,4 +45,11 @@ class HomeController extends Controller
             "pengajuan_jajans" => $pengajuan_jajans
         ]);
     }
+    public function removeFromCart($id)
+    {
+        // Logika penghapusan barang dari keranjang
+        Transaksi::where('id', $id)->delete();
+
+        return redirect()->back()->with("status", "yah kenapa ga jadi?? mimin sedih");
+    }
 }

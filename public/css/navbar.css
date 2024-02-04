@@ -1,0 +1,59 @@
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.navbar-toggler.animated .navbar-toggler-icon {
+    animation: rotate 20s infinite linear; /* Durasi animasi untuk rotasi */
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
+.dropdown-menu {
+    animation-duration: 0.30s; /* Durasi animasi untuk slideDown dan slideUp */
+}
+
+.dropdown-menu.slide-down {
+    animation-name: slideDown;
+}
+
+.dropdown-menu.slide-up {
+    animation-name: slideUp;
+}
+
+.marquee {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.marquee span {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(-100%, 0); }
+}
