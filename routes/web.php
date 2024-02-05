@@ -310,6 +310,8 @@ Route::prefix('transaksi')->group(function () {
             $total_checkout += ($checkout->barang->price * $checkout->jumlah);
         }
 
+        // dd($checkouts);
+
         return view("transaksi", [
             "barangs" => $barangs,
             "carts" => $carts,
@@ -319,6 +321,7 @@ Route::prefix('transaksi')->group(function () {
             "saldo" => $saldo
         ]);
     })->name("transaksi");
+
 
 
     Route::get('/add', function () {
@@ -340,24 +343,55 @@ Route::prefix('transaksi')->group(function () {
             return redirect()->back()->with("status", "Top Up Saldo Sedang Diproses");
         }
     })->name("transaksi.create");
-    
+
     Route::post('/tariktunai', function (Request $request) {
         if ($request->type == 1) {
-            $invoice_id = "SAL_" . Auth::user()->id . now()->timestamp;
+            $invoice_id = "TAR_" . Auth::user()->id . now()->timestamp;
+            $saldo = Saldo::where("user_id", Auth::user()->id)->first();
 
-            Transaksi::create([
-                "user_id" => Auth::user()->id,
-                "jumlah" => $request->jumlah,
-                "invoice_id" => $invoice_id,
-                "type" => $request->type,
-                "status" => 2
-            ]);
-
-            return redirect()->back()->with("status", "Tarik Tunai Sedang Diproses");
+            if ($saldo && $saldo->saldo >= $request->jumlah) {
+                Transaksi::create([
+                    "user_id" => Auth::user()->id,
+                    "jumlah" => $request->jumlah,
+                    "invoice_id" => $invoice_id,
+                    "type" => $request->type,
+                    "status" => 2
+                ]);
+                return redirect()->back()->with("status", "Tarik Tunai Sedang Diproses");
+            } else {
+                return redirect()->back()->with("status", "Saldo Anda Tidak Mencukupi");
+            }
         }
     })->name("transaksi.tariktunai");
+});
 
-    
+Route::prefix('data_kantin')->group(function () {
+    Route::get("/", function () {
+
+        $transaksis = Transaksi::where("user_id", (Auth::user()->id))
+        ->where('type', 2)->get();
+        $details = Transaksi::where("type", 2)
+            ->get();
+
+        return view("data_kantin", [
+            "transaksis" => $transaksis,
+            "details" => $details,
+        ]);
+    })->name("data_kantin");
+});
+Route::prefix('data_bank')->group(function () {
+    Route::get("/", function () {
+
+        $transaksis = Transaksi::where("user_id", (Auth::user()->id))
+        ->where('type', 1)->get();
+        $details = Transaksi::where("type", 1)
+            ->get();
+
+        return view("data_bank", [
+            "transaksis" => $transaksis,
+            "details" => $details,
+        ]);
+    })->name("data_bank");
 });
 
 

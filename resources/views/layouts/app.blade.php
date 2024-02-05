@@ -32,20 +32,27 @@
                     </button>
                         <ul class="navbar-nav ml-auto animate__animated animate__slideInDown">
                             @auth
-                                @if (Auth::user()->role_id === 3)
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('home') }}">Beranda</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ $page == 'Transaksi' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('transaksi') }}">Belanja</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ $page == 'Topup' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('topup') }}">Top Up</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link {{ $page == 'Tariktunai' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('tariktunai') }}">Tarik Tunai</a>
-                                    </li>
-                                @endif
+                            @if (Auth::user()->role_id === 3)
+    <li class="nav-item">
+        <a class="nav-link {{ $page == 'Home' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('home') }}">Beranda</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ $page == 'Transaksi' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('transaksi') }}">Belanja</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ $page == 'Topup' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('topup') }}">Top Up</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ $page == 'Tariktunai' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('tariktunai') }}">Tarik Tunai</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ $page == 'DataBank' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('data_bank') }}">Riwayat Bank</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link {{ $page == 'DataKantin' ? 'active' : '' }}" style="font-style: italic; font-weight:Bold; color: white" href="{{ route('data_kantin') }}">Riwayat Kantin</a>
+    </li>
+@endif
+
     
                                 @if (Auth::user()->role_id === 2)
                                     <li class="nav-item">

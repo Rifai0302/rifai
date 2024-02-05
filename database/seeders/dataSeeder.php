@@ -40,7 +40,7 @@ class dataSeeder extends Seeder
 
         $andi = User::create([
             "name" => "siswa",
-            "email" => "siswav@gmail.com",
+            "email" => "siswa@gmail.com",
             "password" => Hash::make("siswa"),
             "role_id" => $student->id
         ]);

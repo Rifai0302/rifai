@@ -21,72 +21,80 @@ $page = 'Home';
                     {{ __('Verifikasi Bank') }}
                 </div>
                 <div class="container mt-3">
-                    <table class="table table-bordered border-dark table-striped">
-                        <thead style="background-color: #0d6efd; color: white;">
+                    <table class="table table-bordered border-dark table-striped" style="border-collapse: collapse;">
+                        <thead style="background-color: #007bff; color: white;">
                             <tr>
-                                <th style="color: white;">No.</th>
-                                <th style="color: white;">Nama</th>
-                                <th style="color: white;">Nominal</th>
-                                <th style="color: white;">topup</th>
+                                <th style="width: 5%;">No.</th>
+                                <th style="width: 25%;">Name</th>
+                                <th style="width: 20%;">Nominal</th>
+                                <th style="width: 20%;">Tipe</th>
+                                <th style="width: 30%;">Action</th>
                             </tr>
                         </thead>
-                                    <tbody>
-                                    @foreach ($pengajuans as $key => $pengajuan)
-    <tr>
-        <td>{{ $key + 1 }}</td>
-        <td>{{ $pengajuan->user->name }}</td>
-        <td>{{ $pengajuan->jumlah }}</td>
-        <td>
-            @if(Str::startsWith($pengajuan->invoice_id, 'SAL_'))
-                <a href="{{ route('topup.setuju', ['transaksi_id' => $pengajuan->id]) }}" class="btn btn-primary">
-                    Setuju
-                </a>
-                <a href="{{ route('topup.tolak', ['transaksi_id' => $pengajuan->id]) }}" class="btn btn-danger">
-                    Tolak
-                </a>
-            @elseif(Str::startsWith($pengajuan->invoice_id, 'TTN_'))
-                <a href="{{ route('tariktunai.setuju', ['transaksi_id' => $pengajuan->id]) }}" class="btn btn-primary">
-                    Setuju
-                </a>
-                <a href="{{ route('tariktunai.tolak', ['transaksi_id' => $pengajuan->id]) }}" class="btn btn-danger">
-                    Tolak
-                </a>
-            @else
-                Unknown
-            @endif
-        </td>
-    </tr>
-@endforeach
-
-                                    </tbody>
-                                </table>
-                            </div>
-                           
-                        </div>  
-                    </div>
+                        <tbody>
+                            @foreach ($pengajuans as $key => $pengajuan)
+                            <tr>
+                                <td>{{ $key + 1 }}</td>
+                                <td>{{ $pengajuan->user->name }}</td>
+                                <td>{{ $pengajuan->jumlah }}</td>
+                                <td>@if (Str::startsWith($pengajuan->invoice_id, 'SAL_'))
+                                    Topup
+                                    @elseif (Str::startsWith($pengajuan->invoice_id, 'TAR_'))
+                                    Tarik Tunai
+                                    @endif
+                                </td>
+                                <td>
+                                    @if (Str::startsWith($pengajuan->invoice_id, 'SAL_'))
+                                    <a href="{{ route('topup.setuju', ['transaksi_id' => $pengajuan->id]) }}" class="btn btn-primary">
+                                        Setujui
+                                    </a>
+                                    <a href="{{ route('topup.tolak', ['transaksi_id' => $pengajuan->id]) }}" class="btn btn-danger">
+                                        Tolak
+                                    </a>
+                                    @endif
+                                    @if (Str::startsWith($pengajuan->invoice_id, 'TAR_'))
+                                    <a href="{{ route('tariktunai.setuju', ['transaksi_id' => $pengajuan->id]) }}" class="btn btn-primary">
+                                        Setujui
+                                    </a>
+                                    <a href="{{ route('tariktunai.tolak', ['transaksi_id' => $pengajuan->id]) }}" class="btn btn-danger">
+                                        Tolak
+                                    </a>
+                                    @endif
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        @endif
+        </div>
+    </div>
+</div>
+@endif
 
-        @if (Auth::user()->role_id === 3)
-            <div class="container px-4 px-lg-5 my-5">
-                <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6">
-                        <img class="card-img-top mb-5 mb-md-0 animate__animated animate__fadeIn" src="{{ asset('assets/images/snack3.png') }}" alt="..." />
-                    </div>
-                    <div class="col-md-6">
-                    <h1 class="display-5" style="font-family: 'Montserrat Bold'; font-weight: bolder;">
-                        SELAMAT BERBELANJA 
-                    </h1>
-                        <div class="fs-5 mb-3"></div>
-                        <p class="lead" style="font-family: 'Noto Sans';">
-                             Selamat Datang Di 64Mart, beraneka ragam jajanan ada disini. Kami membuat jajan jadi lebih mudah dan juga dengan harga pelajar. Yuk mulai belanja dengan mengeklik tombol dibawah!
-                        </p>
-                        <a class="btn btn-outline-primary mt-auto" href="{{ route('transaksi') }}">belanja</a>
-                    </div>
-                </div>
+
+                     
+
+@if (Auth::user()->role_id === 3)
+    <div class="container px-4 px-lg-5 my-5">
+        <div class="row gx-4 gx-lg-5 align-items-center">
+            <div class="col-md-6">
+                <img class="card-img-top mb-5 mb-md-0 animate__animated animate__fadeIn" src="{{ asset('assets/images/snack3.png') }}" alt="..." />
             </div>
-        @endif
+            <div class="col-md-6">
+                <h1 class="display-5" style="font-family: 'Montserrat Bold'; font-weight: bolder;">
+                    SELAMAT BERBELANJA 
+                </h1>
+                <div class="fs-5 mb-3"></div>
+                <p class="lead" style="font-family: 'Noto Sans';">
+                    Selamat Datang Di 64Mart, beraneka ragam jajanan ada disini. Kami membuat jajan jadi lebih mudah dan juga dengan harga pelajar. Yuk mulai belanja dengan mengeklik tombol dibawah!
+                </p>
+                <a class="btn btn-outline-primary mt-auto" href="{{ route('transaksi') }}">belanja</a>
+            </div>
+        </div>
+    </div>
+@endif
+
 
         @if (Auth::user()->role_id === 2)
         <div class="container">
